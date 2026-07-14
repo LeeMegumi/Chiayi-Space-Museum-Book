@@ -903,9 +903,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1278963092}
   - component: {fileID: 1278963091}
+  - component: {fileID: 1278963093}
   - component: {fileID: 1278963089}
   - component: {fileID: 1278963088}
-  - component: {fileID: 1278963093}
+  - component: {fileID: 1278963094}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1039,6 +1040,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1278963094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278963087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b30ecf2d1386b48aa7a2cfc0df40c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: COM4
+  readMessage: 
 --- !u!1 &1504805615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flip: {fileID: 1007772760}
+  arduino: {fileID: 1278963094}
+  flipCooldown: 2
 --- !u!4 &1707254045
 Transform:
   m_ObjectHideFlags: 0
