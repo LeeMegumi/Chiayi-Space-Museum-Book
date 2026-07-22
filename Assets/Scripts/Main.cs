@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class Main : MonoBehaviour
 {
     public AutoFlip flip;
@@ -7,6 +8,9 @@ public class Main : MonoBehaviour
     public float flipCooldown = 0.4f; // 兩次翻頁最短間隔 (秒)，防彈跳。想更鈍就調大
     private string lastHandled = "";  // 已處理過的訊息，用來偵測「新的一次轉動」
     private float lastFlipTime = -999f;
+
+    public AudioSource turnNextAudio;
+    public AudioSource turnPerviousAudio;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,10 +25,12 @@ public class Main : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             flip.FlipRightPage();
+            turnNextAudio.Play();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             flip.FlipLeftPage();
+            turnPerviousAudio.Play();
         }
 
         // 手輪操作：輪詢 ArduinoBasic 的 readMessage (不需修改 ArduinoBasic.cs)
@@ -44,11 +50,13 @@ public class Main : MonoBehaviour
                     {
                         flip.FlipRightPage();    // 順時針 → 右翻 (等同 Arrow Right)
                         lastFlipTime = Time.time;
+                        turnNextAudio.Play();
                     }
                     else if (dir == 'L')
                     {
                         flip.FlipLeftPage();     // 逆時針 → 左翻 (等同 Arrow Left)
                         lastFlipTime = Time.time;
+                        turnPerviousAudio.Play();
                     }
                 }
             }
