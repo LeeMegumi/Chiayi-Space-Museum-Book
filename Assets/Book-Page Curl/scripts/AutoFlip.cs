@@ -26,10 +26,24 @@ public class AutoFlip : MonoBehaviour {
     {
         StartCoroutine(FlipToEnd());
     }
+    // 翻頁動畫是否進行中
+    public bool IsFlipping
+    {
+        get { return isFlipping; }
+    }
+    // 是否還能往後翻：翻過去之後右頁必須還有圖，否則會翻到沒有設計的空白頁
+    public bool CanFlipRight
+    {
+        get { return !isFlipping && ControledBook.currentPage + 2 < ControledBook.TotalPageCount; }
+    }
+    // 是否還能往前翻：已在第一頁就不能再翻
+    public bool CanFlipLeft
+    {
+        get { return !isFlipping && ControledBook.currentPage > 0; }
+    }
     public void FlipRightPage()
     {
-        if (isFlipping) return;
-        if (ControledBook.currentPage >= ControledBook.TotalPageCount) return;
+        if (!CanFlipRight) return;
         isFlipping = true;
         float frameTime = PageFlipTime / AnimationFramesCount;
         float xc = (ControledBook.EndBottomRight.x + ControledBook.EndBottomLeft.x) / 2;
@@ -41,8 +55,7 @@ public class AutoFlip : MonoBehaviour {
     }
     public void FlipLeftPage()
     {
-        if (isFlipping) return;
-        if (ControledBook.currentPage <= 0) return;
+        if (!CanFlipLeft) return;
         isFlipping = true;
         float frameTime = PageFlipTime / AnimationFramesCount;
         float xc = (ControledBook.EndBottomRight.x + ControledBook.EndBottomLeft.x) / 2;

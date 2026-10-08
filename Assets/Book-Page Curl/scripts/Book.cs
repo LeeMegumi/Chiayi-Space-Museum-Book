@@ -369,6 +369,13 @@ public class Book : MonoBehaviour {
         LeftNext.sprite= (currentPage > 0 && currentPage <= bookPages.Length) ? bookPages[currentPage-1] : background;
         RightNext.sprite=(currentPage>=0 &&currentPage<bookPages.Length) ? bookPages[currentPage] : background;
     }
+    // 不播動畫，直接跳到指定頁 (待機回到第一頁用)
+    public void JumpToPage(int page)
+    {
+        if (pageDragging) return;
+        currentPage = Mathf.Clamp(page, 0, bookPages.Length);
+        UpdateSprites();
+    }
     public void TweenForward()
     {
         if(mode== FlipMode.RightToLeft)
